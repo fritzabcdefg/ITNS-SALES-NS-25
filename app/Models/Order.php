@@ -9,4 +9,6 @@ class Order extends Model
 {
     use HasFactory;
     protected $table = 'orderinfo';
+    public $timestamps = false;
+    protected $primaryKey = 'orderinfo_id';
 }
