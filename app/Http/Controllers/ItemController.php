@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Models\Item;
 use App\Models\Stock;
 use App\Imports\ItemImport;
+use App\Imports\ItemStockImport;
 use Excel;
 
 class ItemController extends Controller
@@ -18,8 +19,11 @@ class ItemController extends Controller
      */
     public function index()
     {
-        $items = DB::table('item')->join('stock', 'item.item_id', '=', 'stock.item_id')->get();
-
+        $items = DB::table('item as i')
+            ->leftJoin('stock as s', 'i.item_id', '=', 's.item_id')
+            ->select('i.*', 's.quantity')
+            ->get();
+        // dd($items);
         return view('item.index', compact('items'));
     }
 
@@ -105,7 +109,7 @@ class ItemController extends Controller
     {
 
         Excel::import(
-            new ItemImport,
+            new ItemStockImport,
             request()
                 ->file('item_upload')
                 ->storeAs(
