@@ -16,7 +16,7 @@ class ItemSeeder extends Seeder
     {
         for ($i = 0; $i < 30; $i++) {
             $item = new Item();
-            $item->name = $faker->word(); // <-- add name
+            $item->name = $faker->word(); 
             $item->description = $faker->realText(20);
             $item->cost_price = $faker->randomFloat(2, 0, 6);
             $item->sell_price = $faker->randomFloat(2, 0, 6);
