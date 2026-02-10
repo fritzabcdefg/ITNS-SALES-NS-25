@@ -12,8 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('item', function (Blueprint $table) {
-            $table->id('item_id');   // primary key named item_id
-            $table->string('name');  // example column
+            $table->id('item_id');   // primary key
+            $table->string('name');  // product name
+            $table->string('description'); // product description
+            $table->decimal('cost_price', 8, 2); // cost price
+            $table->decimal('sell_price', 8, 2); // selling price
+            $table->string('img_path')->default('default.jpg'); // image path
             $table->timestamps();
         });
     }
