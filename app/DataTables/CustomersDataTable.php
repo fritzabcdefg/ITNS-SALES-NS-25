@@ -40,10 +40,10 @@ class CustomersDataTable extends DataTable
             ->join('customer', 'users.id', '=', 'customer.user_id')
             ->select(
                 'users.id AS id',
-                'users.name',
-                'users.email',
-                'customer.addressline',
-                'customer.phone',
+                'users.name as name',
+                'users.email as email',
+                'customer.addressline as address',
+                'customer.phone as phone',
                 'users.created_at'
             );
         // ->where('users.id', '<>', Auth::id());

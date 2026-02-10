@@ -29,6 +29,7 @@ Route::post('/items-import', [ItemController::class, 'import'])->name('item.impo
 
 Route::prefix('admin')->group(function () {
     Route::get('/customers', [DashboardController::class, 'getCustomers'])->name('admin.customers');
+    Route::get('/users', [DashboardController::class, 'getUsers'])->name('admin.users');
 });
 
 Route::resource('items', ItemController::class);
