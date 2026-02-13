@@ -36,6 +36,7 @@ Route::prefix('admin')->group(function () {
     Route::get('/orders', [DashboardController::class, 'getOrders'])->name('admin.orders');
     Route::get('/order/{id}', [OrderController::class, 'processOrder'])->name('admin.orderDetails');
     Route::post('/order/{id}', [OrderController::class, 'orderUpdate'])->name('admin.orderUpdate');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
 });
 
 Route::resource('items', ItemController::class);

@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
+use Illuminate\Support\Facades\Mail;
 use App\Models\Order;
+use App\Mail\SendOrderStatus;
 
 class OrderController extends Controller
 {
@@ -48,18 +50,19 @@ class OrderController extends Controller
                 ->select('c.user_id', 'i.description', 'ol.quantity', 'i.img_path', 'i.sell_price')
                 ->get();
             // dd($myOrder);
-            $user =  DB::table('users as u')->join('customer as c', 'u.id', '=', 'c.user_id')
+            $user =  DB::table('users as u')
+                ->join('customer as c', 'u.id', '=', 'c.user_id')
                 ->join('orderinfo as o', 'o.customer_id', '=', 'c.customer_id')
                 ->where('o.orderinfo_id', $id)
                 ->select('u.id', 'u.email')
                 ->first();
             // dd($user);
-            // Mail::to($user->email)
-            // ->send(new SendOrderStatus($myOrder));
+            Mail::to($user->email)
+                ->send(new SendOrderStatus($myOrder));
             return redirect()->route('admin.orders')->with('success', 'order updated');
         }
 
-        return redirect()->route('admin.orders')->with('success', 'order updated');
-        // redirect()->route('admin.orders')->with('error', 'email not sent');
+        // return redirect()->route('admin.orders')->with('success', 'order updated');
+        return redirect()->route('admin.orders')->with('error', 'email not sent');
     }
 }

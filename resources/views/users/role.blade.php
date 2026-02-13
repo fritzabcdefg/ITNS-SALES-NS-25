@@ -1,5 +1,5 @@
-{{-- <form action="{{ route('users.update', $row->id) }}" method="POST"> --}}
-<form action="#" method="POST">
+<form action="{{ route('users.update', $row->id) }}" method="POST">
+    {{-- <form action="#" method="POST"> --}}
     @csrf
     <select name ="role" class="form-select" aria-label="Default select example">
         <option value="user">User</option>
